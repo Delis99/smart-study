@@ -10,13 +10,13 @@
 
 ## About
 
-Smart Study Buddy is an autonomous AI tutor that breaks down educational barriers by intelligently deciding when to analyze images, search the web, or translate to Spanish—all without requiring manual commands from users. Unlike traditional chatbots that wait for explicit instructions, this system uses AWS Bedrock Agents to autonomously orchestrate multiple specialized services, providing comprehensive educational support 24/7.
+Smart Study Buddy is an autonomous AI tutor that breaks down educational barriers by intelligently deciding when to analyze images, search the web, or translate to Spanish all without requiring manual commands from users. Unlike traditional chatbots that wait for explicit instructions, this system uses AWS Bedrock Agents to autonomously orchestrate multiple specialized services, providing comprehensive educational support 24/7.
 
-The project addresses critical gaps in educational technology. With 41 million Spanish speakers in the United States and 65% of learners being visual learners, existing educational tools fall short by being English-only and unable to process images. Smart Study Buddy solves these problems by providing truly autonomous, multi-modal, and bilingual educational support.
+The project addresses critical gaps in educational technology. With 41 million Spanish speakers in the United States and 65% of learners being visual learners, existing educational tools fall short by being English only and unable to process images. Smart Study Buddy solves these problems by providing truly autonomous, multi-modal, and bilingual educational support.
 
 ## What It Does
 
-When a student uploads a photo of a math problem, the agent automatically detects the image, analyzes it using Claude 3.5 Sonnet v2's vision capabilities, and provides step-by-step explanations—no buttons or commands needed. When someone asks about recent developments in technology, the agent recognizes the temporal keyword and automatically searches the web for current information. When a user writes in Spanish, the system detects the language and responds fluently in Spanish with proper educational terminology.
+When a student uploads a photo of a math problem, the agent automatically detects the image, analyzes it using Claude 3.5 Sonnet v2's vision capabilities, and provides step-by-step explanations no buttons or commands needed. When someone asks about recent developments in technology, the agent recognizes the temporal keyword and automatically searches the web for current information. When a user writes in Spanish, the system detects the language and responds fluently in Spanish with proper educational terminology.
 
 The autonomous decision-making is powered by AWS Bedrock Agents, which analyze each query and intelligently select from four specialized capabilities: image analysis with Claude Vision API, real-time web search integration, news fetching for current events, and bilingual translation between English and Spanish. This creates a seamless learning experience where students can focus on understanding concepts rather than figuring out which buttons to click.
 
@@ -58,13 +58,13 @@ One of the biggest challenges was the AWS US-EAST-1 outage on October 20, 2025, 
 
 Another significant challenge was image data truncation. When passing base64-encoded images as action group parameters, the Bedrock Agent was truncating the data to approximately 16 characters, making image analysis impossible. The solution was to store images in sessionAttributes instead, where they remain intact and accessible to the Lambda functions. This required careful debugging and understanding of how Bedrock Agents handle different types of data.
 
-Getting the agent to autonomously detect and analyze uploaded images required crafting explicit instructions with strong directive language. Initially, the agent would respond with "I don't see an image" despite the image being present in sessionAttributes. The solution was to provide step-by-step protocols in the agent instructions, using keywords like "MUST" and "NEVER" to establish clear behavior patterns. This taught an important lesson: autonomous AI agents need explicit guidance to behave autonomously—they don't inherently know what to do.
+Getting the agent to autonomously detect and analyze uploaded images required crafting explicit instructions with strong directive language. Initially, the agent would respond with "I don't see an image" despite the image being present in sessionAttributes. The solution was to provide step-by-step protocols in the agent instructions, using keywords like "MUST" and "NEVER" to establish clear behavior patterns. This taught an important lesson: autonomous AI agents need explicit guidance to behave autonomously they don't inherently know what to do.
 
 Rate limiting was another challenge, with AWS Bedrock initially providing only 2 requests per minute. This severely limited testing during development. The solution involved implementing retry logic for throttling exceptions, providing clear user feedback about rate limits, and requesting a quota increase from AWS. The system now handles rate limiting gracefully while waiting for the increased quota.
 
 ## Impact and Results
 
-Smart Study Buddy successfully demonstrates that autonomous AI agents can provide genuinely useful educational support. The system is fully deployed and production-ready, operating at approximately $5 per month with AWS credits. It handles text and images seamlessly, responds in both English and Spanish fluently, and provides current information through real-time web search—all while requiring zero manual commands from users.
+Smart Study Buddy successfully demonstrates that autonomous AI agents can provide genuinely useful educational support. The system is fully deployed and production ready, operating at approximately $5 per month with AWS credits. It handles text and images seamlessly, responds in both English and Spanish fluently, and provides current information through real-time web search all while requiring zero manual commands from users.
 
 The project addresses real educational inequality by breaking down language barriers for Spanish-speaking students, making visual learning accessible through image analysis, and providing 24/7 intelligent tutoring at minimal cost. It proves that AI agents with proper instruction design can make complex, multi-step decisions reliably in production environments.
 
